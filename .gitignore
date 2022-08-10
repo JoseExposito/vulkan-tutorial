@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Binaries
+00-setup/VulkanTest
+01-hello-triangle/HelloTriangle
