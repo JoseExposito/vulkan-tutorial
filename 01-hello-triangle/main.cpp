@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstdlib>
+#include <vector>
 
 constexpr uint32_t WIDTH = 800;
 constexpr uint32_t HEIGHT = 600;
@@ -59,6 +60,18 @@ private:
         VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
         if (result != VK_SUCCESS) {
             throw std::runtime_error("failed to create instance!");
+        }
+
+        // Log the supported extensions
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+        std::vector<VkExtensionProperties> extensions(extensionCount);
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+
+        std::cout << "Available extensions:" << std::endl;
+        for (const auto &extension : extensions) {
+            std::cout << "\t- " << extension.extensionName << std::endl;
         }
     }
 
