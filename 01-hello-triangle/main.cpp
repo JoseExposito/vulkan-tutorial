@@ -82,6 +82,9 @@ private:
     }
 
     void cleanup() {
+        // Clean up the Vulkan instance
+        vkDestroyInstance(instance, nullptr);
+
         // Clean the GLFW window
         glfwDestroyWindow(window);
         glfwTerminate();
