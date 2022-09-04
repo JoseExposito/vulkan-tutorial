@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <cstring>
+#include <optional>
 #include <vector>
 
 constexpr uint32_t WIDTH = 800;
@@ -21,6 +22,14 @@ const bool enableValidationLayers = false;
 #else
 const bool enableValidationLayers = true;
 #endif
+
+struct QueueFamilyIndices {
+    std::optional<uint32_t> graphicsFamily;
+
+    bool isComplete() {
+        return graphicsFamily.has_value();
+    }
+};
 
 VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger) {
     auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
@@ -212,7 +221,31 @@ private:
     }
 
     bool isDeviceSuitable(VkPhysicalDevice device) {
-        return true;
+        QueueFamilyIndices indices = findQueueFamilies(device);
+        return indices.isComplete();
+    }
+
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) {
+        QueueFamilyIndices indices;
+
+        uint32_t queueFamilyCount = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+
+        std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+        vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+        for (int i = 0; i < queueFamilies.size(); i++) {
+            if (queueFamilies.at(i).queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+                std::cout << "VK_QUEUE_GRAPHICS_BIT queue family found" << std::endl;
+                indices.graphicsFamily = i;
+            }
+
+            if (indices.isComplete()) {
+                break;
+            }
+        }
+
+        return indices;
     }
 
     void mainLoop() {
