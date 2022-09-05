@@ -31,3 +31,15 @@ additional checks such as parameter validation, memory leaks, thread safety, etc
 can be enabled through validation layers.
 
 Validation layers are set in the VkInstanceCreateInfo structure.
+
+### Physical device
+
+A VkPhysicalDevice is a data type to represent each hardware component available
+in the system, usually GPUs.
+
+Physical device capabilities can be queried in order to decide whether the
+hardware is suitable for the app or not. Information about the device is
+available in the form of:
+
+ - Properties: Device name, type, supported Vulkan version, etc.
+ - Features: Describe support for option features, such as shader support.
