@@ -43,3 +43,12 @@ available in the form of:
 
  - Properties: Device name, type, supported Vulkan version, etc.
  - Features: Describe support for option features, such as shader support.
+
+### Queue families
+
+Almost every operation in Vulkan, from drawing to uploading a texture, requires
+submitting a command buffer to a queue. Those commands are executed in order,
+even though they might finish in a different order.
+
+A physical device have different types of queue families depending on the
+supported commands.
