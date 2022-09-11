@@ -52,3 +52,15 @@ even though they might finish in a different order.
 
 A physical device have different types of queue families depending on the
 supported commands.
+
+### Logical device and queues
+
+A logical device is the interface to a physical device.
+
+In order to create it we need:
+
+ - A physical device to interface with.
+ - Information about the queues to use and its queue family index.
+ - The physical device features to use.
+
+Once the logical device is created, we can obtain handles to its queues.
