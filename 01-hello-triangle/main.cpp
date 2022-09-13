@@ -25,9 +25,10 @@ const bool enableValidationLayers = true;
 
 struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;
+    std::optional<uint32_t> presentFamily;
 
     bool isComplete() {
-        return graphicsFamily.has_value();
+        return graphicsFamily.has_value() && presentFamily.has_value();
     }
 };
 
@@ -248,6 +249,12 @@ private:
             if (queueFamilies.at(i).queueFlags & VK_QUEUE_GRAPHICS_BIT) {
                 std::cout << "VK_QUEUE_GRAPHICS_BIT queue family found" << std::endl;
                 indices.graphicsFamily = i;
+            }
+
+            VkBool32 presentSupport = false;
+            vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+            if (presentSupport) {
+                indices.presentFamily = i;
             }
 
             if (indices.isComplete()) {
