@@ -64,3 +64,15 @@ In order to create it we need:
  - The physical device features to use.
 
 Once the logical device is created, we can obtain handles to its queues.
+
+### Window surface
+
+Since Vulkan is a platform agnostic API, in order to interact with the window
+system we need to use the VK_KHR_surface extension.
+
+This instance extension receives the native handlers to the window and creates a
+surface Vulkan is able to draw on.
+
+In addition, to a queue with graphics support, this extension requires an
+additional queue with presentation support in order to display graphics on the
+surface.
