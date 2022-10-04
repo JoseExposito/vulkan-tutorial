@@ -76,3 +76,23 @@ surface Vulkan is able to draw on.
 In addition, to a queue with graphics support, this extension requires an
 additional queue with presentation support in order to display graphics on the
 surface.
+
+### Swap chain
+
+Unlike in OpenGL, Vulkan does not have a default framebuffer. Instead, the swap
+chain is used to manage the framebuffers that will be displayed on the window
+surface.
+
+The swap chain is a queue of images waiting to be displayed on the screen on
+which the application draws before they are displayed.
+
+Depending on the configuration, the images will be displayed in different ways.
+The available properties of the swap chain are:
+
+ - Capabilities: Min/max number of images in the swap chain, min/max width of
+   the images, etc.
+ - Surface format: Pixel format and color space.
+ - Presentation mode: Conditions for swapping images on the screen: immediate,
+   FIFO, mailbox (~triple buffering), etc.
+ - Swap extend: Width and heigh of the images in the swap chain, usually equal
+   to the size in pixels of the window surface.
