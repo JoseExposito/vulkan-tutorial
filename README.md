@@ -96,3 +96,26 @@ The available properties of the swap chain are:
    FIFO, mailbox (~triple buffering), etc.
  - Swap extend: Width and heigh of the images in the swap chain, usually equal
    to the size in pixels of the window surface.
+
+### Graphics pipeline basics
+
+The graphics pipeline is a sequence of operations that take the vertices and
+textures and transforms them in pixels.
+
+The operations are:
+
+ - Input assembler: Collect the raw vertex data from buffers specified by the
+   application.
+ - Vertex shader: Run for each vertex transforming their position from model
+   space to screen space.
+ - Tessellation shader: Allow to subdivide geometry, i.e., transform 1 triangle
+   in 3 triangles to increase the mesh quality.
+ - Geometry shader: Run for each primitive (triangle, line, point) to discard it
+   or output more primitives.
+ - Rasterization stage: Discretizes primitives into fragments, discarding
+   fragments behind other fragments or outside of the screen.
+ - Fragment shader: Run for each fragment determining which framebuffer(s) they
+   are written to and with which it color and depth.
+ - Color blending: Mix fragments that map to the same pixel in the framebuffer
+   based on transparency.
+
