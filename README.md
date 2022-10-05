@@ -119,3 +119,10 @@ The operations are:
  - Color blending: Mix fragments that map to the same pixel in the framebuffer
    based on transparency.
 
+### SPIR-V
+
+Unlike in OpenGL, shader code in Vulkan (and OpenCL) is specified in a bytecode
+format called SPIR-V.
+
+In order to compile GLSL to SPIR-V, Khronos provides a vendor-independent
+compiler.
