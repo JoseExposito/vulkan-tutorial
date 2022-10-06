@@ -103,6 +103,7 @@ private:
         createLogicalDevice();
         createSwapChain();
         createImageViews();
+        createGraphicsPipeline();
     }
 
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
@@ -494,6 +495,10 @@ private:
                 throw std::runtime_error("failed to create image views!");
             }
         }
+    }
+
+    void createGraphicsPipeline() {
+
     }
 
     void mainLoop() {
