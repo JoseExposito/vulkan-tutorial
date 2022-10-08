@@ -126,3 +126,16 @@ format called SPIR-V.
 
 In order to compile GLSL to SPIR-V, Khronos provides a vendor-independent
 compiler.
+
+### Programable pipeline stages: Shaders
+
+The programable stages of the graphics pipeline phases are: Vertex shader,
+tessellation shader, geometry shader and fragment shader.
+
+In these stages it is possible to upload your own code to the GPU in form of a
+shader program. The steps to attach shaders to a pipeline are:
+
+ - Compile the GLSL shader to SPIR-V.
+ - Wrap them in a shader module, a small structure that wraps the binary data.
+ - Wrap the shader module in VkPipelineShaderStageCreateInfo structure, with
+   information about the stage and the shader main function.
