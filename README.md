@@ -139,3 +139,28 @@ shader program. The steps to attach shaders to a pipeline are:
  - Wrap them in a shader module, a small structure that wraps the binary data.
  - Wrap the shader module in VkPipelineShaderStageCreateInfo structure, with
    information about the stage and the shader main function.
+
+### Pipeline fixed-function stages
+
+There are 3 stages in the pipeline that allow to tweak their operations using
+parameters but, unlike the programable stages, the way they work is predefined.
+
+These stages are: Input assembler, rasterization and color blending.
+
+The parameters that can be configured are:
+
+ - Vertex input: Describes the format of the vertex data passed to the vertex
+   shader.
+ - Input assembly: Describes what kind of geometry will be drawn from the
+   vertices (points, lines, triangles and line/triangle strips) and if primitive
+   restart should be enabled (when reusing vertices using strips, for example,
+   using the last vertex of a line as the first one of the next, it allows to
+   break this chain using an special value).
+ - Viewport: Region of the framebuffer to be rendered.
+ - Scissors: Area within the viewport to be rendered.
+ - Rasterizer: The rasterizer discretizes primitives into fragments. Parameters
+   such as polygon mode (fill, line or point) or line width can be configured.
+ - Multisampling: Configures anti-aliasing.
+ - Color blending: Describes how colors returned by the fragment shader should
+   be mixed.
+ - Pipeline layout: Describes the layout of the shader uniforms
