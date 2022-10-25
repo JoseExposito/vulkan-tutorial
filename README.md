@@ -172,3 +172,15 @@ color buffers or depth buffers.
 
 Subpasses are subsequent rendering operations that depend on the contents of
 framebuffers in previous passes.
+
+### The Vulkan graphics pipeline
+
+Now we can combine the concepts explained so far to create the Vulkan graphics
+pipeline:
+
+ - Shader stages: Define the functionality of the programmable stages.
+ - Fixed-function state: Structures that define the fixed-function stages of the
+   pipeline.
+ - Pipeline layout: Uniform and push values referenced by the shader that can be
+   updated at draw time.
+ - Render pass: Attachments referenced by the pipeline stages and their usage.
