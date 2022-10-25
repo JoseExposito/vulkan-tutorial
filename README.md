@@ -164,3 +164,11 @@ The parameters that can be configured are:
  - Color blending: Describes how colors returned by the fragment shader should
    be mixed.
  - Pipeline layout: Describes the layout of the shader uniforms
+
+### Render passes
+
+A render pass consists of one or more subpasses and multiple attachments like
+color buffers or depth buffers.
+
+Subpasses are subsequent rendering operations that depend on the contents of
+framebuffers in previous passes.
