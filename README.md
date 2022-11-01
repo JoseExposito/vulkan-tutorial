@@ -184,3 +184,20 @@ pipeline:
  - Pipeline layout: Uniform and push values referenced by the shader that can be
    updated at draw time.
  - Render pass: Attachments referenced by the pipeline stages and their usage.
+
+### Command buffers
+
+Commands in Vulkan (drawing operations, memory transfers, etc) are not executed
+calling functions. Instead, they are recorded in a command buffer and sent to a
+queue.
+
+The steps to create a command buffer and record it are:
+
+ - Create a command pool as a memory pool for command buffers
+ - Create the command buffer
+ - Start recording in the command buffer by calling vkBeginCommandBuffer
+ - Start the render pass
+ - Bind the pipeline
+ - Record the render commands
+ - End the render pass
+ - Stop recording in the command buffer by calling vkEndCommandBuffer
