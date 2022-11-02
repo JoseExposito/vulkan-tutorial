@@ -201,3 +201,33 @@ The steps to create a command buffer and record it are:
  - Record the render commands
  - End the render pass
  - Stop recording in the command buffer by calling vkEndCommandBuffer
+
+### Synchronization
+
+These are the main synchronization mechanisms available in Vulkan:
+
+ - Binary semaphores: Used to add order between queue operations in the GPU.
+   The semaphore starts unsignaled. Once it is signaled, the next queue
+   operation can run. Pseudocode example:
+
+   ```
+   VkCommandBuffer A, B = ... // record command buffers
+   VkSemaphore S = ... // create a semaphore
+
+   // enqueue A, signal S when done - starts executing immediately
+   vkQueueSubmit(work: A, signal: S, wait: None)
+
+   // enqueue B, wait on S to start
+   vkQueueSubmit(work: B, signal: None, wait: S)
+
+   // The CPU does not wait, the synchronization happens in the GPU
+   ```
+ - Fences: Used to wait (in the CPU) for the GPU to finish.
+   ```
+   VkCommandBuffer A = ... // record command buffer with the transfer
+   VkFence F = ... // create the fence
+   // enqueue A, start work immediately, signal F when done
+   vkQueueSubmit(work: A, fence: F)
+   vkWaitForFence(F) // blocks execution until A has finished executing
+   save_screenshot_to_disk() // can't run until the transfer has finished
+   ```
