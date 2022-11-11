@@ -231,3 +231,19 @@ These are the main synchronization mechanisms available in Vulkan:
    vkWaitForFence(F) // blocks execution until A has finished executing
    save_screenshot_to_disk() // can't run until the transfer has finished
    ```
+
+### Drawing
+
+Finally, with all the concepts learn so far, we can star drawing. The high level
+steps to draw (in a very inefficient way) are:
+
+ - Wait for the previous frame to finish: Use a fence to make the GPU wait until
+   the previous frame has finished.
+ - Acquire an image from the swap chain: By calling vkAcquireNextImageKHR.
+ - Record a command buffer: Draws the scene onto that image. See the
+   [Command buffers](#command-buffers) section.
+ - Submit the recorded command buffer: Sets the synchronization semaphores and
+   sends the recorded command buffer to the graphics queue by calling
+   vkQueueSubmit().
+ - Present the swap chain image: The last step is submitting the result back to
+   the swap chain to have it eventually show up on the screen.
